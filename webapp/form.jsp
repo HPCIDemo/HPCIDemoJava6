@@ -134,7 +134,7 @@ fieldset legend {
 				<!-- IMPORTANT: id CCAcceptForm needs to match the ID's in the HostedPCI script code -->
 				<!-- So if you change this ID, make sure to change it in all other places -->
 				<!-- Action points to the servlet -->
-				<form id="CCAcceptForm" action="/DemoIframe" method="post">
+				<form id="CCAcceptForm" action="/IframeServlet" method="post">
 					<fieldset>
 						<!-- Form Name -->
 						<legend>Hosted PCI</legend>

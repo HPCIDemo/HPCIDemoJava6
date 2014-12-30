@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
 // physical url for the servlet
-@WebServlet("/DemoIframe")
-public class DemoIframe extends HttpServlet {
+@WebServlet("/IframeServlet")
+public class IframeServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request,
