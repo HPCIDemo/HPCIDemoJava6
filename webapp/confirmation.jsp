@@ -28,6 +28,7 @@ fieldset {
 	background: #ddd;
 	border-radius: 5px;
 	padding: 15px;
+	margin-top: 10px;
 }
 
 fieldset legend {
@@ -41,6 +42,14 @@ fieldset legend {
 	margin-right: 60px;
 	width: auto;
 }
+.row {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.col-centered {
+	float: none;
+	margin: 0 auto;
+}
 </style>
 </head>
 <body>
@@ -48,13 +57,13 @@ fieldset legend {
 	<div class="container">
 		<!-- row class sets the margins -->
 		<div class="row">
-			<!-- col-md-4 class uses the bootstrap grid system to use 1/3rd of the left side of the page -->
-			<div class="col-md-4">
+			<!-- col-md-7 col-centered class uses the bootstrap grid system to use 7/12 of the screen and place it in the middle -->
+			<div class="col-md-7 col-centered">
 				<form>
 					<section style="margin: 10px;">
 						<fieldset style="min-height: 100px;">
 							<!-- Form Name -->
-							<legend>Hosted PCI</legend>
+							<legend>Web Checkout</legend>
 							<!-- Text Input -->
 							<div>
 								Dear Hosted PCI Customer,<br /> Thank you for trying our
@@ -77,14 +86,15 @@ fieldset legend {
 								<label>Amount: <c:out value="${param.amount}" /></label><br />
 								<!-- Gets comment from the user input on previous page -->
 								<label>Comments: <c:out value="${param.comment}" /></label><br />
+								<label>Full Message: </label><div><c:out value="${map}" /></div><br />
 								<label>*******************</label><br /> Thank you for using Hosted PCI.<br />
 								<br /> <input Type="button" class="btn btn-primary" value="Back" onClick="history.go(-1);return true;"></input>
 							</div>
 						</fieldset>
 					</section>
 				</form>
-			</div>
-		</div>
-	</div>
+			</div><!-- col-md-7 col-centered -->
+		</div><!-- row -->
+	</div><!-- container -->
 </body>
 </html>

@@ -277,7 +277,7 @@ fieldset legend {
 									Session Key: <div id="sessionKeyResponse"></div><br />
 									Session Status: <div id="sessionStatus"></div><br />
 								</div>
-							</div>
+							</div><!-- row -->
 						</fieldset>
 						<br />
 						<fieldset>
@@ -291,13 +291,13 @@ fieldset legend {
 									<label>CVV Token</label><br />
 									<input id="cvvToken" type="text" name="cvvToken" placeholder="Automatically Filled">
 								</div>
-							</div>
+							</div><!-- row -->
 							<br />
 							<div class="row">
 								<div class="col-xs-5 col-sm-4 col-md-4">
 									<label>Expiry MM/YY</label>
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-2 col-sm-2 col-md-2">
 									<input id="expiryMonth" type="text" name="expiryMonth" size="3" placeholder="MM">
@@ -305,7 +305,7 @@ fieldset legend {
 								<div class="col-xs-2 col-sm-2 col-md-2">
 									<input id="expiryYear" type="text" name="expiryYear" size="3" placeholder="YY">
 								</div>
-							</div>
+							</div><!-- row -->
 						</fieldset>
 						<br />
 						<fieldset>
@@ -317,7 +317,7 @@ fieldset legend {
 								<div class="col-xs-4 col-sm-3 col-md-5">
 									<input id="firstName" type="text" name="firstName">
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-4 col-sm-3 col-md-4">
 									<label>Last Name:</label>
@@ -325,7 +325,7 @@ fieldset legend {
 								<div class="col-xs-4 col-sm-3 col-md-5">
 									<input id="lastName" type="text" name="lastName">
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-4 col-sm-3 col-md-4">
 									<label>Address Line 1:</label>
@@ -333,7 +333,7 @@ fieldset legend {
 								<div class="col-xs-4 col-sm-3 col-md-5">
 									<input id="address1" type="text" name="address1">
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-4 col-sm-3 col-md-4">
 									<label>Address Line 2:</label>
@@ -341,7 +341,7 @@ fieldset legend {
 								<div class="col-xs-4 col-sm-3 col-md-5">
 									<input id="address2" type="text" name="address2">
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-4 col-sm-3 col-md-4">
 									<label>City:</label>
@@ -349,7 +349,7 @@ fieldset legend {
 								<div class="col-xs-4 col-sm-3 col-md-5">
 									<input id="city" type="text" name="city">
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-4 col-sm-3 col-md-4">
 									<label>State / Province:</label>
@@ -357,7 +357,7 @@ fieldset legend {
 								<div class="col-xs-4 col-sm-3 col-md-5">
 									<input id="state" type="text" name="state">
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-4 col-sm-3 col-md-4">
 									<label>Zip / Postal Code:</label>
@@ -365,7 +365,7 @@ fieldset legend {
 								<div class="col-xs-4 col-sm-3 col-md-5">
 									<input id="zip" type="text" name="zip">
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-4 col-sm-3 col-md-4">
 									<label>Country:</label>
@@ -376,7 +376,7 @@ fieldset legend {
 										<option value="US">United States</option>
 									</select>
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-4 col-sm-3 col-md-4">
 									<label>Payment Comments:</label>
@@ -384,7 +384,7 @@ fieldset legend {
 								<div class="col-xs-4 col-sm-3 col-md-5">
 									<input id="paymentComments" type="text" name="paymentComments">
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-4 col-sm-3 col-md-4">
 									<label>Payment Reference:</label>
@@ -392,7 +392,7 @@ fieldset legend {
 								<div class="col-xs-4 col-sm-3 col-md-5">
 									<input id="paymentReference" type="text" name="paymentReference">
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-4 col-sm-3 col-md-4">
 									<label>Currency:</label>
@@ -403,7 +403,7 @@ fieldset legend {
 										<option value="USD">US Dollar</option>
 									</select>
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-4 col-sm-3 col-md-4">
 									<label>Payment Amount:</label>
@@ -411,7 +411,7 @@ fieldset legend {
 								<div class="col-xs-4 col-sm-3 col-md-5">
 									<input id="paymentAmount" type="text" name="PaymentAmount">
 								</div>
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-4 col-sm-3 col-md-4">
 									<label>Payment Profile:</label>
@@ -423,8 +423,7 @@ fieldset legend {
 										<option value="DEF_MONERIS">DEF_MONERIS - Currency: USD</option>
 									</select>
 								</div>
-							</div>
-							
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-xs-6 col-sm-3 col-md-4">
 									<button id="processPaymentButton" type="button" value="Process Payment" class="btn btn-primary" disabled>Process Payment</button><br />
@@ -432,7 +431,13 @@ fieldset legend {
 								<div class="col-xs-6 col-sm-3 col-md-4">
 									<button id="paymentResetButton" type="button" value="Reset Payment" class="btn btn-primary" disabled>Reset Payment</button><br />
 								</div>
-							</div>
+							</div><!-- row -->
+							<br />
+							<div class="row">
+								<div class="col-xs-6 col-sm-3 col-md-4">
+									<button Type="button" class="btn btn-primary" value="Back" onClick="history.go(-1);return true;">Back</button>
+								</div>
+							</div><!-- row -->
 						</fieldset>
 						<br />
 						<fieldset>
@@ -442,35 +447,35 @@ fieldset legend {
 									<label>Payment Status: </label>
 									<div id="paymentStatus" style="word-wrap: break-word;"></div><br />
 								</div>	
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-md-8">
 									<label>Reference ID: </label>
 									<div id="referenceId" style="word-wrap: break-word;"></div><br />
 								</div>	
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-md-8">
 									<label>Response Code: </label>
 									<div id="paymentResponseCode" style="word-wrap: break-word;"></div><br />
 								</div>	
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-md-8">
 									<label>Response Message: </label>
 									<div id="paymentResponseMessage" style="word-wrap: break-word;"></div><br />
 								</div>	
-							</div>
+							</div><!-- row -->
 							<div class="row">
 								<div class="col-md-12">
 									<label>Full Message: </label>
 									<div id="message" style="word-wrap: break-word;"></div><br />
 								</div>	
-							</div>
+							</div><!-- row -->
 						</fieldset>
-					</fieldset>
+					</fieldset><!-- Outer fieldset -->
 				</form>
-			</div>
+			</div><!-- col-md-7 col-centered -->
 		</div><!-- row -->
 	</div><!-- container -->
 
