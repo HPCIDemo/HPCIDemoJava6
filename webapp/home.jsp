@@ -16,12 +16,6 @@ h1 {
 	border-bottom: 1px solid #E5E5E5;
 }
 
-text-align
-:center
-;
-
-
-}
 .container {
 	margin-top: 10px;
 }
@@ -68,16 +62,18 @@ fieldset legend {
 						<!-- <legend>Session Information</legend> -->
 						<div class="row">
 							<div class="col-xs-6 col-sm-4 col-md-5 col-centered">
-								<a href="/form.jsp" role="button" class="btn btn-primary">Web Checkout (Iframe)</a>
+								<!-- Link to iframe demo app -->
+								<a href="/webCheckoutForm.jsp" role="button" class="btn btn-primary">Web Checkout (Iframe)</a>
 								<br /><br />
-								<a href="/index.jsp" role="button" class="btn btn-primary">Phone/Call Center (IVR)</a>
+								<!-- Link to IVR demo app -->
+								<a href="/phoneSession.jsp" role="button" class="btn btn-primary">Phone/Call Center (IVR)</a>
 								<br />
 							</div>
 						</div>
 					</fieldset>
 				</fieldset>
 			</form>
-		</div>
+		</div><!-- col-md-7 col-centered -->
 	</div><!-- row -->
 </div><!-- container -->
 </body>

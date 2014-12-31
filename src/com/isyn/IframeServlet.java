@@ -31,7 +31,7 @@ public class IframeServlet extends HttpServlet {
 		// Preprocess request: we actually don't need to do any business stuff,
 		// so just display JSP.
 		// During load, get page from this jsp file "form.jsp".
-		request.getRequestDispatcher("/form.jsp").forward(request, response);
+		request.getRequestDispatcher("/webCheckoutForm.jsp").forward(request, response);
 	}
 
 	@Override
@@ -95,108 +95,108 @@ public class IframeServlet extends HttpServlet {
 		// Uses the callUrl method to initiate the call to HostedPCI using the
 		// iframe,
 		// It requires the complete url and the populated map
-		String callResponse = callUrl(urlString, hpciRequestParamMap);
+		String callResponse = DemoUtil.callUrl(urlString, hpciRequestParamMap);
 
 		// Uses the parseQueryString method to collect the response from
 		// HostedPCI
 		// And pass the resulting map in a parameter "map" to be used in the
 		// confirmation.jsp file
-		request.setAttribute("map", parseQueryString(callResponse));
+		request.setAttribute("map", DemoUtil.parseQueryString(callResponse));
 
 		// Pass all the information that was collected to the confirmation page
 		// "confirmation.jsp"
-		request.getRequestDispatcher("/confirmation.jsp").forward(request, response);
+		request.getRequestDispatcher("/webCheckoutConfirmation.jsp").forward(request, response);
 
 		// END: of doPost
 	}
 
 	// The callUrl method, it needs a complete url + populated map of pairs
 	// (key,value)
-	public static String callUrl(String urlString, Map<String, String> paramMap) {
-		String urlReturnValue = "";
-		try {
-			// Construct data
-			StringBuffer dataBuf = new StringBuffer();
-			boolean firstParam = true;
-			for (String paramKey : paramMap.keySet()) {
-				if (!firstParam)
-					dataBuf.append("&");
-				dataBuf.append(URLEncoder.encode(paramKey, "UTF-8"))
-						.append("=")
-						.append(URLEncoder.encode(paramMap.get(paramKey),
-								"UTF-8"));
-				firstParam = false;
-			}
-			String data = dataBuf.toString();
-
-			// Send data
-			URL url = new URL(urlString);
-			URLConnection conn = url.openConnection();
-			conn.setDoOutput(true);
-			OutputStreamWriter wr = new OutputStreamWriter(
-					conn.getOutputStream());
-			wr.write(data);
-			wr.flush();
-
-			// Get the response
-			BufferedReader rd = new BufferedReader(new InputStreamReader(
-					conn.getInputStream()));
-			String line;
-			while ((line = rd.readLine()) != null) {
-				urlReturnValue = urlReturnValue + line;
-			}
-			wr.close();
-			rd.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			urlReturnValue = "";
-		}
-		return urlReturnValue;
-	} // END: callUrl
-
-	// The parseQueryString method, it uses the response from the callUrl method
-	// And puts it inside a map of pairs
-	public static Map<String, String> parseQueryString(String queryStr) {
-		Map<String, String> map = new LinkedHashMap<String, String>();
-		String queryStrDecoded = "";
-		if (queryStr == null)
-			return map;
-
-		try {
-			queryStrDecoded = URLDecoder.decode(queryStr, "UTF-8");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		}
-		String[] params = queryStrDecoded.split("&");
-		for (String param : params) {
-			String name = "";
-			String value = "";
-
-			String[] paramPair = param.split("=");
-			if (paramPair != null && paramPair.length > 0) {
-				name = paramPair[0];
-				if (paramPair.length > 1 && paramPair[1] != null) {
-					try {
-						if (paramPair.length == 2) {
-							value = URLDecoder.decode(paramPair[1], "UTF-8");
-						} else // paramPair.length >= 3
-						{
-							value = URLDecoder.decode(
-									paramPair[paramPair.length - 1], "UTF-8");
-						}
-
-					} catch (UnsupportedEncodingException e) {
-						logMessage("Could not decode:" + paramPair[1]);
-					}
-				}
-			}
-			map.put(name, value);
-		}
-		return map;
-	} // END: parseQueryString
-
-	// Needed for the callUrl and parseQueryString methods
-	public static void logMessage(String msg) {
-		System.out.println(msg);
-	}
+//	public static String callUrl(String urlString, Map<String, String> paramMap) {
+//		String urlReturnValue = "";
+//		try {
+//			// Construct data
+//			StringBuffer dataBuf = new StringBuffer();
+//			boolean firstParam = true;
+//			for (String paramKey : paramMap.keySet()) {
+//				if (!firstParam)
+//					dataBuf.append("&");
+//				dataBuf.append(URLEncoder.encode(paramKey, "UTF-8"))
+//						.append("=")
+//						.append(URLEncoder.encode(paramMap.get(paramKey),
+//								"UTF-8"));
+//				firstParam = false;
+//			}
+//			String data = dataBuf.toString();
+//
+//			// Send data
+//			URL url = new URL(urlString);
+//			URLConnection conn = url.openConnection();
+//			conn.setDoOutput(true);
+//			OutputStreamWriter wr = new OutputStreamWriter(
+//					conn.getOutputStream());
+//			wr.write(data);
+//			wr.flush();
+//
+//			// Get the response
+//			BufferedReader rd = new BufferedReader(new InputStreamReader(
+//					conn.getInputStream()));
+//			String line;
+//			while ((line = rd.readLine()) != null) {
+//				urlReturnValue = urlReturnValue + line;
+//			}
+//			wr.close();
+//			rd.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			urlReturnValue = "";
+//		}
+//		return urlReturnValue;
+//	} // END: callUrl
+//
+//	// The parseQueryString method, it uses the response from the callUrl method
+//	// And puts it inside a map of pairs
+//	public static Map<String, String> parseQueryString(String queryStr) {
+//		Map<String, String> map = new LinkedHashMap<String, String>();
+//		String queryStrDecoded = "";
+//		if (queryStr == null)
+//			return map;
+//
+//		try {
+//			queryStrDecoded = URLDecoder.decode(queryStr, "UTF-8");
+//		} catch (UnsupportedEncodingException e1) {
+//			e1.printStackTrace();
+//		}
+//		String[] params = queryStrDecoded.split("&");
+//		for (String param : params) {
+//			String name = "";
+//			String value = "";
+//
+//			String[] paramPair = param.split("=");
+//			if (paramPair != null && paramPair.length > 0) {
+//				name = paramPair[0];
+//				if (paramPair.length > 1 && paramPair[1] != null) {
+//					try {
+//						if (paramPair.length == 2) {
+//							value = URLDecoder.decode(paramPair[1], "UTF-8");
+//						} else // paramPair.length >= 3
+//						{
+//							value = URLDecoder.decode(
+//									paramPair[paramPair.length - 1], "UTF-8");
+//						}
+//
+//					} catch (UnsupportedEncodingException e) {
+//						logMessage("Could not decode:" + paramPair[1]);
+//					}
+//				}
+//			}
+//			map.put(name, value);
+//		}
+//		return map;
+//	} // END: parseQueryString
+//
+//	// Needed for the callUrl and parseQueryString methods
+//	public static void logMessage(String msg) {
+//		System.out.println(msg);
+//	}
 }

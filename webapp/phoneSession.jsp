@@ -218,12 +218,6 @@ h1 {
 	border-bottom: 1px solid #E5E5E5;
 }
 
-text-align
-:center
-;
-
-
-}
 .container {
 	margin-top: 10px;
 }

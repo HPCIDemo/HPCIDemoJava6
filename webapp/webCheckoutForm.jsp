@@ -21,7 +21,7 @@
 <script src="https://cc.hostedpci.com/WBSStatic/site60/proxy/js/hpci-cciframe-1.0.js" type="text/javascript" charset="utf-8"></script>
 <script>
 	var hpciCCFrameHost = "https://cc.hostedpci.com";
-	var hpciCCFrameFullUrl = "https://cc.hostedpci.com/iSynSApp/showPxyPage!ccFrame.action?pgmode1=prod&locationName=javasample1&sid=528160&reportCCType=Y&fullParentHost=http://localhost:8799&fullParentQStr=/form.jsp";
+	var hpciCCFrameFullUrl = "https://cc.hostedpci.com/iSynSApp/showPxyPage!ccFrame.action?pgmode1=prod&locationName=javasample1&sid=528160&reportCCType=Y&fullParentHost=http://localhost:8799&fullParentQStr=/webCheckoutForm.jsp";
 	var hpciCCFrameName = "ccframe"; // use the name of the frame containing the credit card
 
 	var hpciSiteErrorHandler = function(errorCode, errorMsg) {
@@ -94,12 +94,6 @@ h1 {
 	border-bottom: 1px solid #E5E5E5;
 }
 
-text-align
-:center
-;
-
-
-}
 .container {
 	margin-top: 10px;
 }
@@ -171,7 +165,7 @@ fieldset legend {
 							</div><!-- row -->
 							<!-- iframe -->
 							<div class="row">
-								<iframe seamless id="ccframe" name="ccframe" onload="receiveHPCIMsg()" src="https://cc.hostedpci.com/iSynSApp/showPxyPage!ccFrame.action?pgmode1=prod&locationName=javasample1&sid=528160&fullParentHost=http://localhost:8799&fullParentQStr=/form.jsp" style="border:none" height="61"> 
+								<iframe seamless id="ccframe" name="ccframe" onload="receiveHPCIMsg()" src="https://cc.hostedpci.com/iSynSApp/showPxyPage!ccFrame.action?pgmode1=prod&locationName=javasample1&sid=528160&fullParentHost=http://localhost:8799&fullParentQStr=/webCheckoutForm.jsp" style="border:none" height="61"> 
 								If you can see this, your browser doesn't understand IFRAME. 
 								</iframe>
 							</div><!-- row -->
