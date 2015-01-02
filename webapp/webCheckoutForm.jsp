@@ -4,11 +4,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>HostedPCI Demo App Payment Page</title>
+<title>HostedPCI Demo App Web Checkout Payment Page</title>
 <!-- Bootstrap -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
-
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -130,213 +129,213 @@ fieldset legend {
 </style>
 </head>
 <body>
-	<!-- container class sets the page to use 100% width -->
-	<div class="container">
-		<!-- row class sets the margins on the sides -->
-		<div class="row">
-			<!-- col-md-7 col-centered class uses the bootstrap grid system to use 7/12 of the screen and place it in the middle -->
-			<div class="col-md-7 col-centered">
-				<!-- IMPORTANT: id CCAcceptForm needs to match the ID's in the HostedPCI script code -->
-				<!-- So if you change this ID, make sure to change it in all other places -->
-				<!-- Action points to the servlet -->
-				<form id="CCAcceptForm" action="/IframeServlet" method="post">
+<!-- container class sets the page to use 100% width -->
+<div class="container">
+	<!-- row class sets the margins on the sides -->
+	<div class="row">
+		<!-- col-md-7 col-centered class uses the bootstrap grid system to use 7/12 of the screen and place it in the middle -->
+		<div class="col-md-7 col-centered">
+			<!-- IMPORTANT: id CCAcceptForm needs to match the ID's in the HostedPCI script code -->
+			<!-- So if you change this ID, make sure to change it in all other places -->
+			<!-- Action points to the servlet -->
+			<form id="CCAcceptForm" action="/IframeServlet" method="post">
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Web Checkout</legend>
 					<fieldset>
-						<!-- Form Name -->
-						<legend>Web Checkout</legend>
-						<fieldset>
-							<legend>Credit Card Information</legend>
-							<!-- Error message for invalid credit card -->
-							<div id="errorMessage" style="display:none;color:red"><label>Invalid card number, try again</label><br/></div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<!-- Select credit card -->
-									<label for="cardType">Card Type</label>
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
+						<legend>Credit Card Information</legend>
+						<!-- Error message for invalid credit card -->
+						<div id="errorMessage" style="display:none;color:red"><label>Invalid card number, try again</label><br/></div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<!-- Select credit card -->
+								<label for="cardType">Card Type</label>
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<!-- id is used in confirmation.jsp -->
+								<select id="cardType" name="cardType" class="selectpicker">
+									<option value="visa">Visa</option>
+									<option value="mastercard">MasterCard</option>
+									<option value="amex">American Express</option>
+								</select>
+							</div>
+						</div><!-- row -->
+						<!-- iframe -->
+						<div class="row">
+							<iframe seamless id="ccframe" name="ccframe" onload="receiveHPCIMsg()" src="https://cc.hostedpci.com/iSynSApp/showPxyPage!ccFrame.action?pgmode1=prod&locationName=javasample1&sid=528160&fullParentHost=http://localhost:8799&fullParentQStr=/webCheckoutForm.jsp" style="border:none" height="61"> 
+							If you can see this, your browser doesn't understand IFRAME. 
+							</iframe>
+						</div><!-- row -->
+						<!-- Input row (exp, month, cvv) -->
+						<div class="row">
+							<div class="col-xs-5 col-sm-4 col-md-4">
+									<label>Expiry MM/YY</label>
 									<!-- id is used in confirmation.jsp -->
-									<select id="cardType" name="cardType" class="selectpicker">
-										<option value="visa">Visa</option>
-										<option value="mastercard">MasterCard</option>
-										<option value="amex">American Express</option>
-									</select>
-								</div>
-							</div><!-- row -->
-							<!-- iframe -->
-							<div class="row">
-								<iframe seamless id="ccframe" name="ccframe" onload="receiveHPCIMsg()" src="https://cc.hostedpci.com/iSynSApp/showPxyPage!ccFrame.action?pgmode1=prod&locationName=javasample1&sid=528160&fullParentHost=http://localhost:8799&fullParentQStr=/webCheckoutForm.jsp" style="border:none" height="61"> 
-								If you can see this, your browser doesn't understand IFRAME. 
-								</iframe>
-							</div><!-- row -->
-							<!-- Input row (exp, month, cvv) -->
-							<div class="row">
-								<div class="col-xs-5 col-sm-4 col-md-4">
-										<label>Expiry MM/YY</label>
-										<!-- id is used in confirmation.jsp -->
-								</div>
-							</div><!-- row -->
-							<!-- Input row (exp, month, cvv) -->
-							<div class="row">
-								<div class="col-xs-2 col-sm-2 col-md-2">
-									<input type="text" id="expiryMonth" name="expiryMonth"
-										size="3" placeholder="MM">
-								</div>
-								<div class="col-xs-2 col-sm-2 col-md-2">		
-									<!-- id is used in confirmation.jsp -->
-									<input type="text" id="expiryYear" name="expiryYear"
-										size="3" placeholder="YY">
-								</div>
-							</div><!-- row -->
-						</fieldset>
+							</div>
+						</div><!-- row -->
+						<!-- Input row (exp, month, cvv) -->
+						<div class="row">
+							<div class="col-xs-2 col-sm-2 col-md-2">
+								<input type="text" id="expiryMonth" name="expiryMonth"
+									size="3" placeholder="MM">
+							</div>
+							<div class="col-xs-2 col-sm-2 col-md-2">		
+								<!-- id is used in confirmation.jsp -->
+								<input type="text" id="expiryYear" name="expiryYear"
+									size="3" placeholder="YY">
+							</div>
+						</div><!-- row -->
+					</fieldset>
+					<br />
+					<fieldset>
+						<legend>Personal Information</legend>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>First Name:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="firstName" type="text" name="firstName">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Last Name:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="lastName" type="text" name="lastName">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Address Line 1:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="address1" type="text" name="address1">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Address Line 2:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="address2" type="text" name="address2">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>City:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="city" type="text" name="city">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>State / Province:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="state" type="text" name="state">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Zip / Postal Code:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="zip" type="text" name="zip">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Country:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<select id="country" name="country">
+									<option value="CAN">Canada</option>
+									<option value="US">United States</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Payment Comments:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="comment" type="text" name="comment">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Merchant Reference:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="merchantRefId" type="text" name="merchantRefId">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Currency:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<select id="currency" name="currency">
+									<option value="CAD">Canadian Dollar</option>
+									<option value="USD">US Dollar</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Payment Amount:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="amount" type="text" name="amount">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Payment Profile:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<select id="paymentProfile" name="paymentProfile">
+									<option value="DEF">DEF - Currency: USD</option>
+									<option value="DEF_MONERIS">DEF_MONERIS - Currency: CAD</option>
+									<option value="DEF_MONERIS">DEF_MONERIS - Currency: USD</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6 col-sm-3 col-md-4">
+								<!-- Submit button -->
+								<button type="submit" value="Submit" class="btn btn-primary"
+									onClick='return sendHPCIMsg();'>Process Payment</button>
+							</div>	
+							<div class="col-xs-6 col-sm-3 col-md-4">
+								<!-- Reset button -->
+								<button id="paymentResetButton" type="button" value="Reset Payment" class="btn btn-primary">Reset Payment</button><br />
+							</div>
+						</div>
 						<br />
-						<fieldset>
-							<legend>Personal Information</legend>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>First Name:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="firstName" type="text" name="firstName">
-								</div>
+						<div class="row">
+							<div class="col-xs-6 col-sm-3 col-md-4">
+								<!-- Back button -->
+								<input Type="button" class="btn btn-primary" value="Back" onClick="history.go(-1);return true;"></input>
 							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Last Name:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="lastName" type="text" name="lastName">
-								</div>
+						</div>
+						<div class="row">
+							<!-- Hidden rows that are required by the iframe -->
+							<div class="col-xs-6 col-sm-3 col-md-4">
+								<input type="hidden" id="ccNum" name="ccNum" value="" class="form-control"> 
+								<input type="hidden" id="ccCVV" name="ccCVV" value="" class="form-control"> 
+								<input type="hidden" id="ccBIN" name="ccBIN" value="" class="form-control">
 							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Address Line 1:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="address1" type="text" name="address1">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Address Line 2:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="address2" type="text" name="address1">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>City:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="city" type="text" name="address1">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>State / Province:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="state" type="text" name="address1">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Zip / Postal Code:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="zip" type="text" name="address1">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Country:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<select id="country" name="country">
-										<option value="CAN">Canada</option>
-										<option value="US">United States</option>
-									</select>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Payment Comments:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="comment" type="text" name="comment">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Payment Reference:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="merchantRefId" type="text" name="merchantRefId">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Currency:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<select id="currency" name="currency">
-										<option value="CAD">Canadian Dollar</option>
-										<option value="USD">US Dollar</option>
-									</select>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Payment Amount:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="amount" type="text" name="amount">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Payment Profile:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<select id="paymentProfile" name="paymentProfile">
-										<option value="DEF">DEF - Currency: USD</option>
-										<option value="DEF_MONERIS">DEF_MONERIS - Currency: CAD</option>
-										<option value="DEF_MONERIS">DEF_MONERIS - Currency: USD</option>
-									</select>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-6 col-sm-3 col-md-4">
-									<!-- Submit button -->
-									<button type="submit" value="Submit" class="btn btn-primary"
-										onClick='return sendHPCIMsg();'>Process Payment</button>
-								</div>	
-								<div class="col-xs-6 col-sm-3 col-md-4">
-									<!-- Reset button -->
-									<button id="paymentResetButton" type="button" value="Reset Payment" class="btn btn-primary">Reset Payment</button><br />
-								</div>
-							</div>
-							<br />
-							<div class="row">
-								<div class="col-xs-6 col-sm-3 col-md-4">
-									<!-- Back button -->
-									<input Type="button" class="btn btn-primary" value="Back" onClick="history.go(-1);return true;"></input>
-								</div>
-							</div>
-							<div class="row">
-								<!-- Hidden rows that are required by the iframe -->
-								<div class="col-xs-6 col-sm-3 col-md-4">
-									<input type="hidden" id="ccNum" name="ccNum" value="" class="form-control"> 
-									<input type="hidden" id="ccCVV" name="ccCVV" value="" class="form-control"> 
-									<input type="hidden" id="ccBIN" name="ccBIN" value="" class="form-control">
-								</div>
-							</div>
-						</fieldset>	
-					</fieldset><!-- Outer fieldset -->
-				</form>
-			</div><!-- col-md-7 col-centered -->
-		</div><!-- row -->
-	</div><!-- container -->
+						</div>
+					</fieldset>	
+				</fieldset><!-- Outer fieldset -->
+			</form>
+		</div><!-- col-md-7 col-centered -->
+	</div><!-- row -->
+</div><!-- container -->
 </body>
 </html>

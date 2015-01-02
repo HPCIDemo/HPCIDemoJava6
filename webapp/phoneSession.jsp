@@ -114,6 +114,7 @@ $(document).ready(function(event){
 		// Take values from the form
 		var ccToken = $('#ccToken').val();
 		var cvvToken = $('#cvvToken').val();
+		var cardType = $("#country option:selected").val();
 		var expiryMonth = $("#expiryMonth").val();
 	    var expiryYear = $("#expiryYear").val();
 		var firstName = $("#firstName").val();
@@ -132,7 +133,7 @@ $(document).ready(function(event){
 
 		$.post("PhoneSessionServlet",
 		{
-			flag: flag, ccToken: ccToken, cvvToken: cvvToken, expiryMonth: expiryMonth, 
+			flag: flag, ccToken: ccToken, cvvToken: cvvToken, cardType: cardType, expiryMonth: expiryMonth, 
 			expiryYear: expiryYear, firstName: firstName, lastName: lastName, address1: address1, 
 			address2: address2, city: city, state: state, zip: zip, country: country, currency: currency,
 			paymentAmount: paymentAmount, paymentComments: paymentComments,
@@ -178,11 +179,9 @@ $(document).ready(function(event){
 		$('#showProgressButton').attr("disabled", true);
 		$('#resetPaymentButton').attr("disabled", true);
 		
-		
 	});
-		
 });
-$.hpciUrlParam = function(name, queryStr){
+/* $.hpciUrlParam = function(name, queryStr){
 	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(queryStr);
 	if (!results) { return 0; }
 	return results[1] || 0;
@@ -196,7 +195,7 @@ $.hpciUrlParamArry = function(name, queryStr) {
 	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(queryStr);
 	if (!results) { return ""; }
 	return results[1] || "";
-}
+} */
 // Function that reads a query string and organizes it
 $.hpciParamMap = function(queryStr) {
 	var queryMap = [], queryToken;
@@ -254,224 +253,238 @@ fieldset legend {
 </style>
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-7 col-centered">
-				<form id="paymentForm">
+<div class="container">
+	<div class="row">
+		<div class="col-md-7 col-centered">
+			<form id="paymentForm">
+				<fieldset>
+					<legend>Phone Session App</legend>
 					<fieldset>
-						<legend>Phone Session App</legend>
-						<fieldset>
-							<legend>Session Information</legend>
-							<div class="row">
-								<div class="col-md-4">
-									<button id="createSessionButton" type="button" value="Create Session" class="btn btn-primary">Create Session</button><br /><br />
-									<button id="showProgressButton" type="button" value="Update Progress" class="btn btn-primary" disabled>Update Progress</button><br />
-								</div>
-								<div class="col-md-8">
-									Session Key: <div id="sessionKeyResponse"></div><br />
-									Session Status: <div id="sessionStatus"></div><br />
-								</div>
-							</div><!-- row -->
-						</fieldset>
+						<legend>Session Information</legend>
+						<div class="row">
+							<div class="col-md-4">
+								<button id="createSessionButton" type="button" value="Create Session" class="btn btn-primary">Create Session</button><br /><br />
+								<button id="showProgressButton" type="button" value="Update Progress" class="btn btn-primary" disabled>Update Progress</button><br />
+							</div>
+							<div class="col-md-8">
+								Session Key: <div id="sessionKeyResponse"></div><br />
+								Session Status: <div id="sessionStatus"></div><br />
+							</div>
+						</div><!-- row -->
+					</fieldset>
+					<br />
+					<fieldset>
+						<legend>Credit Card Information</legend>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<!-- Select credit card -->
+								<label for="cardType">Card Type</label>
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<select id="cardType" name="cardType" class="selectpicker">
+									<option value="visa">Visa</option>
+									<option value="mastercard">MasterCard</option>
+									<option value="amex">American Express</option>
+								</select>
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-6 col-sm-5 col-md-5">
+								<label>Credit Card Token</label><br />
+								<input id="ccToken" type="text" name="ccToken" placeholder="Automatically Filled">
+							</div>
+							<div class="col-xs-6 col-sm-5 col-md-5">
+								<label>CVV Token</label><br />
+								<input id="cvvToken" type="text" name="cvvToken" placeholder="Automatically Filled">
+							</div>
+						</div><!-- row -->
 						<br />
-						<fieldset>
-							<legend>Credit Card Information</legend>
-							<div class="row">
-								<div class="col-xs-6 col-sm-5 col-md-5">
-									<label>Credit Card Token</label><br />
-									<input id="ccToken" type="text" name="ccToken" placeholder="Automatically Filled">
-								</div>
-								<div class="col-xs-6 col-sm-5 col-md-5">
-									<label>CVV Token</label><br />
-									<input id="cvvToken" type="text" name="cvvToken" placeholder="Automatically Filled">
-								</div>
-							</div><!-- row -->
-							<br />
-							<div class="row">
-								<div class="col-xs-5 col-sm-4 col-md-4">
-									<label>Expiry MM/YY</label>
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-2 col-sm-2 col-md-2">
-									<input id="expiryMonth" type="text" name="expiryMonth" size="3" placeholder="MM">
-								</div>
-								<div class="col-xs-2 col-sm-2 col-md-2">
-									<input id="expiryYear" type="text" name="expiryYear" size="3" placeholder="YY">
-								</div>
-							</div><!-- row -->
-						</fieldset>
+						<div class="row">
+							<div class="col-xs-5 col-sm-4 col-md-4">
+								<label>Expiry MM/YY</label>
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-2 col-sm-2 col-md-2">
+								<input id="expiryMonth" type="text" name="expiryMonth" size="3" placeholder="MM">
+							</div>
+							<div class="col-xs-2 col-sm-2 col-md-2">
+								<input id="expiryYear" type="text" name="expiryYear" size="3" placeholder="YY">
+							</div>
+						</div><!-- row -->
+					</fieldset>
+					<br />
+					<fieldset>
+						<legend>Personal Information</legend>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>First Name:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="firstName" type="text" name="firstName">
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Last Name:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="lastName" type="text" name="lastName">
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Address Line 1:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="address1" type="text" name="address1">
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Address Line 2:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="address2" type="text" name="address2">
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>City:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="city" type="text" name="city">
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>State / Province:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="state" type="text" name="state">
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Zip / Postal Code:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="zip" type="text" name="zip">
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Country:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<select id="country" name="country">
+									<option value="CAN">Canada</option>
+									<option value="US">United States</option>
+								</select>
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Payment Comments:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="paymentComments" type="text" name="paymentComments">
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Payment Reference:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="paymentReference" type="text" name="paymentReference">
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Currency:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<select id="currency" name="currency">
+									<option value="CAD">Canadian Dollar</option>
+									<option value="USD">US Dollar</option>
+								</select>
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Payment Amount:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<input id="paymentAmount" type="text" name="PaymentAmount">
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-4">
+								<label>Payment Profile:</label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-5">
+								<select id="paymentProfile" name="paymentProfile">
+									<option value="DEF">DEF - Currency: CAD</option>
+									<option value="DEF_MONERIS">DEF_MONERIS - Currency: CAD</option>
+									<option value="DEF_MONERIS">DEF_MONERIS - Currency: USD</option>
+								</select>
+							</div>
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-xs-6 col-sm-3 col-md-4">
+								<button id="processPaymentButton" type="button" value="Process Payment" class="btn btn-primary" disabled>Process Payment</button><br />
+							</div>
+							<div class="col-xs-6 col-sm-3 col-md-4">
+								<button id="paymentResetButton" type="button" value="Reset Payment" class="btn btn-primary" disabled>Reset Payment</button><br />
+							</div>
+						</div><!-- row -->
 						<br />
-						<fieldset>
-							<legend>Personal Information</legend>
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>First Name:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="firstName" type="text" name="firstName">
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Last Name:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="lastName" type="text" name="lastName">
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Address Line 1:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="address1" type="text" name="address1">
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Address Line 2:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="address2" type="text" name="address2">
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>City:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="city" type="text" name="city">
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>State / Province:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="state" type="text" name="state">
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Zip / Postal Code:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="zip" type="text" name="zip">
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Country:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<select id="country" name="country">
-										<option value="CAN">Canada</option>
-										<option value="US">United States</option>
-									</select>
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Payment Comments:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="paymentComments" type="text" name="paymentComments">
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Payment Reference:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="paymentReference" type="text" name="paymentReference">
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Currency:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<select id="currency" name="currency">
-										<option value="CAD">Canadian Dollar</option>
-										<option value="USD">US Dollar</option>
-									</select>
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Payment Amount:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<input id="paymentAmount" type="text" name="PaymentAmount">
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-4 col-sm-3 col-md-4">
-									<label>Payment Profile:</label>
-								</div>
-								<div class="col-xs-4 col-sm-3 col-md-5">
-									<select id="paymentProfile" name="paymentProfile">
-										<option value="DEF">DEF - Currency: USD</option>
-										<option value="DEF_MONERIS">DEF_MONERIS - Currency: CAD</option>
-										<option value="DEF_MONERIS">DEF_MONERIS - Currency: USD</option>
-									</select>
-								</div>
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-xs-6 col-sm-3 col-md-4">
-									<button id="processPaymentButton" type="button" value="Process Payment" class="btn btn-primary" disabled>Process Payment</button><br />
-								</div>
-								<div class="col-xs-6 col-sm-3 col-md-4">
-									<button id="paymentResetButton" type="button" value="Reset Payment" class="btn btn-primary" disabled>Reset Payment</button><br />
-								</div>
-							</div><!-- row -->
-							<br />
-							<div class="row">
-								<div class="col-xs-6 col-sm-3 col-md-4">
-									<button Type="button" class="btn btn-primary" value="Back" onClick="history.go(-1);return true;">Back</button>
-								</div>
-							</div><!-- row -->
-						</fieldset>
-						<br />
-						<fieldset>
-							<legend>Response</legend>
-							<div class="row">
-								<div class="col-md-8">
-									<label>Payment Status: </label>
-									<div id="paymentStatus" style="word-wrap: break-word;"></div><br />
-								</div>	
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-md-8">
-									<label>Reference ID: </label>
-									<div id="referenceId" style="word-wrap: break-word;"></div><br />
-								</div>	
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-md-8">
-									<label>Response Code: </label>
-									<div id="paymentResponseCode" style="word-wrap: break-word;"></div><br />
-								</div>	
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-md-8">
-									<label>Response Message: </label>
-									<div id="paymentResponseMessage" style="word-wrap: break-word;"></div><br />
-								</div>	
-							</div><!-- row -->
-							<div class="row">
-								<div class="col-md-12">
-									<label>Full Message: </label>
-									<div id="message" style="word-wrap: break-word;"></div><br />
-								</div>	
-							</div><!-- row -->
-						</fieldset>
-					</fieldset><!-- Outer fieldset -->
-				</form>
-			</div><!-- col-md-7 col-centered -->
-		</div><!-- row -->
-	</div><!-- container -->
-
+						<div class="row">
+							<div class="col-xs-6 col-sm-3 col-md-4">
+								<button Type="button" class="btn btn-primary" value="Back" onClick="history.go(-1);return true;">Back</button>
+							</div>
+						</div><!-- row -->
+					</fieldset>
+					<br />
+					<fieldset>
+						<legend>Response</legend>
+						<div class="row">
+							<div class="col-md-8">
+								<label>Payment Status: </label>
+								<div id="paymentStatus" style="word-wrap: break-word;"></div><br />
+							</div>	
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-md-8">
+								<label>Reference ID: </label>
+								<div id="referenceId" style="word-wrap: break-word;"></div><br />
+							</div>	
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-md-8">
+								<label>Response Code: </label>
+								<div id="paymentResponseCode" style="word-wrap: break-word;"></div><br />
+							</div>	
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-md-8">
+								<label>Response Message: </label>
+								<div id="paymentResponseMessage" style="word-wrap: break-word;"></div><br />
+							</div>	
+						</div><!-- row -->
+						<div class="row">
+							<div class="col-md-12">
+								<label>Full Message: </label>
+								<div id="message" style="word-wrap: break-word;"></div><br />
+							</div>	
+						</div><!-- row -->
+					</fieldset>
+				</fieldset><!-- Outer fieldset -->
+			</form>
+		</div><!-- col-md-7 col-centered -->
+	</div><!-- row -->
+</div><!-- container -->
 </body>
 </html>

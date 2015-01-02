@@ -53,48 +53,48 @@ fieldset legend {
 </style>
 </head>
 <body>
-	<!-- container class sets the page to use 100% width -->
-	<div class="container">
-		<!-- row class sets the margins -->
-		<div class="row">
-			<!-- col-md-7 col-centered class uses the bootstrap grid system to use 7/12 of the screen and place it in the middle -->
-			<div class="col-md-7 col-centered">
-				<form>
-					<section style="margin: 10px;">
-						<fieldset style="min-height: 100px;">
-							<!-- Form Name -->
-							<legend>Web Checkout</legend>
-							<!-- Text Input -->
-							<div>
-								Dear Hosted PCI Customer,<br /> Thank you for trying our
-								services. If you have any questions, please contact us at
-								www.hostedpci.com<br />
-								<br /> <label>Transaction Summary</label><br /> <label>*******************</label><br />
-								<!-- Gets responseStatus from the response map that the iframe sent back -->
-								<label>Status: <c:out value="${map['pxyResponse.responseStatus.name']}" /></label><br />
-								<!-- Gets description from the response map that the iframe sent back -->
-								<label>Description: <c:out value="${map['pxyResponse.responseStatus.description']}" /></label><br />
-								<!-- Gets processorRefId from the response map that the iframe sent back -->
-								<label>Authorization Code: <c:out value="${map['pxyResponse.processorRefId']}" /></label><br />
-								<!-- Gets merchantRefId from the response map that the iframe sent back -->
-								<label>Merchant ID: <c:out value="${map['pxyResponse.merchantRefId']}" /></label><br />
-								<!-- Gets cardType from the user input on previous page -->
-								<label>Card Type: <c:out value="${map['pxyResponse.mappedParams']}" /></label><br />
-								<!-- Gets today's date -->
-								<label>Payment Date: <c:set var="now" value="<%=new java.util.Date()%>" /><fmt:formatDate type="both" value="${now}" /></label><br />
-								<!-- Gets amount from the user input on previous page -->
-								<label>Amount: <c:out value="${param.amount}" /></label><br />
-								<!-- Gets comment from the user input on previous page -->
-								<label>Comments: <c:out value="${param.comment}" /></label><br />
-								<label>Full Message: </label><div><c:out value="${map}" /></div><br />
-								<label>*******************</label><br /> Thank you for using Hosted PCI.<br />
-								<br /> <input Type="button" class="btn btn-primary" value="Back" onClick="history.go(-1);return true;"></input>
-							</div>
-						</fieldset>
-					</section>
-				</form>
-			</div><!-- col-md-7 col-centered -->
-		</div><!-- row -->
-	</div><!-- container -->
+<!-- container class sets the page to use 100% width -->
+<div class="container">
+	<!-- row class sets the margins -->
+	<div class="row">
+		<!-- col-md-7 col-centered class uses the bootstrap grid system to use 7/12 of the screen and place it in the middle -->
+		<div class="col-md-7 col-centered">
+			<form>
+				<section style="margin: 10px;">
+					<fieldset style="min-height: 100px;">
+						<!-- Form Name -->
+						<legend>Web Checkout</legend>
+						<!-- Text Input -->
+						<div>
+							Dear Hosted PCI Customer,<br /> Thank you for trying our
+							services. If you have any questions, please contact us at
+							www.hostedpci.com<br />
+							<br /> <label>Transaction Summary</label><br /> <label>*******************</label><br />
+							<!-- Gets responseStatus from the response map that the iframe sent back -->
+							<label>Status: <c:out value="${map['pxyResponse.responseStatus.name']}" /></label><br />
+							<!-- Gets description from the response map that the iframe sent back -->
+							<label>Description: <c:out value="${map['pxyResponse.responseStatus.description']}" /></label><br />
+							<!-- Gets processorRefId from the response map that the iframe sent back -->
+							<label>Authorization Code: <c:out value="${map['pxyResponse.processorRefId']}" /></label><br />
+							<!-- Gets merchantRefId from the response map that the iframe sent back -->
+							<label>Merchant ID: <c:out value="${map['pxyResponse.merchantRefId']}" /></label><br />
+							<!-- Gets cardType from the user input on previous page -->
+							<label>Card Type: <c:out value="${map['pxyResponse.mappedParams']}" /></label><br />
+							<!-- Gets today's date -->
+							<label>Payment Date: <c:set var="now" value="<%=new java.util.Date()%>" /><fmt:formatDate type="both" value="${now}" /></label><br />
+							<!-- Gets amount from the user input on previous page -->
+							<label>Amount: <c:out value="${param.amount}" /></label><br />
+							<!-- Gets comment from the user input on previous page -->
+							<label>Comments: <c:out value="${param.comment}" /></label><br />
+							<label>Full Message: </label><div><c:out value="${map}" /></div><br />
+							<label>*******************</label><br /> Thank you for using Hosted PCI.<br />
+							<br /> <input Type="button" class="btn btn-primary" value="Back" onClick="history.go(-1);return true;"></input>
+						</div>
+					</fieldset>
+				</section>
+			</form>
+		</div><!-- col-md-7 col-centered -->
+	</div><!-- row -->
+</div><!-- container -->
 </body>
 </html>

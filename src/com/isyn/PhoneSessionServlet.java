@@ -18,11 +18,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/PhoneSessionServlet" })
 public class PhoneSessionServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
  
-    public void doPost (HttpServletRequest request,HttpServletResponse response)
+	public void doPost (HttpServletRequest request,HttpServletResponse response)
             throws ServletException, IOException {
-    	
     	
 		// Setup request param map
 		Map<String, String> hpciRequestParamMap = new LinkedHashMap<String, String>();
@@ -44,10 +43,7 @@ public class PhoneSessionServlet extends HttpServlet {
 		
 		// Get sessionId from the ajax call
 		String sessionId = request.getParameter("sessionId");
-		
-		//System.out.println(flag);
-		//System.out.println(sessionId);
-		
+
 		if(flag.equals("createSession")) {
 		
 			// Values required for createSession
@@ -59,12 +55,12 @@ public class PhoneSessionServlet extends HttpServlet {
 			hpciRequestParamMap.put("userMarker2", "any");
 			hpciRequestParamMap.put("userMarker3", "any");
 			
+			// URL action used
 			urlString = "https://api-sampqa1stg.c1.hostedpci.com/iSynSApp/manageCCMapPhoneAPI.action";
-				
 			
 		} else if(flag.equals("checkStatus")) {
 			
-			// Values required for showProgress
+			// Values required for showProgress command
 			hpciRequestParamMap.put("cmd", "showprogress");
 			hpciRequestParamMap.put("promptLang", "en_US");
 			hpciRequestParamMap.put("cvvEntry", "");
@@ -74,7 +70,7 @@ public class PhoneSessionServlet extends HttpServlet {
 			hpciRequestParamMap.put("userMarker3", "any");
 			hpciRequestParamMap.put("selectedPcsId", sessionId);
 			
-			
+			//URL action used
 			urlString = "https://api-sampqa1stg.c1.hostedpci.com/iSynSApp/manageCCMapPhoneAPI.action";
 				
 		} else if(flag.equals("processPayment")) {
@@ -82,9 +78,9 @@ public class PhoneSessionServlet extends HttpServlet {
 			// Get the values from the form
 			String ccToken = request.getParameter("ccToken");
 			String cvvToken = request.getParameter("cvvToken");
-			
 			String expiryMonth = request.getParameter("expiryMonth");
 			String expiryYear = request.getParameter("expiryYear");
+			String cardType = request.getParameter("cardType");
 			String firstName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
 			String address1 = request.getParameter("address1");
@@ -93,7 +89,6 @@ public class PhoneSessionServlet extends HttpServlet {
 			String state = request.getParameter("state");
 			String zip = request.getParameter("zip");
 			String country = request.getParameter("country");
-			
 			String paymentComments = request.getParameter("paymentComments");
 			String paymentReference = request.getParameter("paymentReference");
 			String currency = request.getParameter("currency");
@@ -101,7 +96,7 @@ public class PhoneSessionServlet extends HttpServlet {
 			String paymentProfile = request.getParameter("paymentProfile");
 			
 			// Fill the map with the required pairs
-			hpciRequestParamMap.put("pxyCreditCard.cardType", "visa");
+			hpciRequestParamMap.put("pxyCreditCard.cardType", cardType);
 			hpciRequestParamMap.put("pxyCreditCard.creditCardNumber", ccToken);
 			hpciRequestParamMap.put("pxyCreditCard.cardCodeVerification", cvvToken);
 			hpciRequestParamMap.put("pxyCreditCard.expirationMonth", expiryMonth);
@@ -135,12 +130,5 @@ public class PhoneSessionServlet extends HttpServlet {
 		
 		// Initiate the call back
 		out.print(callResponse);
-		
-		// System.out.println(hpciRequestParamMap);
-		// JSONObject json = new JSONObject();
-		// StringWriter out = new StringWriter();
-		// JSONValue.writeJSONString(json, out);
-		// String jsonText = out.toString();
-		// JSONObject json = new JSONObject(DemoUtil.parseQueryString(callResponse));
     }
 }
