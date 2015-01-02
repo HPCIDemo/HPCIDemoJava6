@@ -263,8 +263,10 @@ fieldset legend {
 						<legend>Session Information</legend>
 						<div class="row">
 							<div class="col-md-4">
-								<button id="createSessionButton" type="button" value="Create Session" class="btn btn-primary">Create Session</button><br /><br />
-								<button id="showProgressButton" type="button" value="Update Progress" class="btn btn-primary" disabled>Update Progress</button><br />
+								<button id="createSessionButton" type="button" value="Create Session" 
+									class="btn btn-primary">Create Session</button><br /><br />
+								<button id="showProgressButton" type="button" value="Update Progress" 
+									class="btn btn-primary" disabled>Update Progress</button><br />
 							</div>
 							<div class="col-md-8">
 								Session Key: <div id="sessionKeyResponse"></div><br />
@@ -434,16 +436,19 @@ fieldset legend {
 						</div><!-- row -->
 						<div class="row">
 							<div class="col-xs-6 col-sm-3 col-md-4">
-								<button id="processPaymentButton" type="button" value="Process Payment" class="btn btn-primary" disabled>Process Payment</button><br />
+								<button id="processPaymentButton" type="button" value="Process Payment" 
+									class="btn btn-primary" disabled>Process Payment</button><br />
 							</div>
 							<div class="col-xs-6 col-sm-3 col-md-4">
-								<button id="paymentResetButton" type="button" value="Reset Payment" class="btn btn-primary" disabled>Reset Payment</button><br />
+								<button id="paymentResetButton" type="button" value="Reset Payment" 
+									class="btn btn-primary" disabled>Reset Payment</button><br />
 							</div>
 						</div><!-- row -->
 						<br />
 						<div class="row">
 							<div class="col-xs-6 col-sm-3 col-md-4">
-								<button Type="button" class="btn btn-primary" value="Back" onClick="history.go(-1);return true;">Back</button>
+								<button Type="button" class="btn btn-primary" value="Back" 
+									onClick="history.go(-1);return true;">Back</button>
 							</div>
 						</div><!-- row -->
 					</fieldset>
