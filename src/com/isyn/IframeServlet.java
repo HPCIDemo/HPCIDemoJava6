@@ -92,7 +92,7 @@ public class IframeServlet extends HttpServlet {
 		// Url string is made of the api url which is given by
 		// HostedPCI + "iSynSApp/paymentAuth.action"
 		String urlString = "https://api-sampqa1stg.c1.hostedpci.com/iSynSApp/paymentAuth.action";
-
+//		String urlString = "https://api-sampqa1stg.c1.hostedpci.com/iSynSApp/paymentSale.action";
 		// Uses the callUrl method to initiate the call to HostedPCI using the
 		// iframe,
 		// It requires the complete url and the populated map
