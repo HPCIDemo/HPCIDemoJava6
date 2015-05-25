@@ -76,7 +76,7 @@ public class DemoUtil {
 			String name = "";
 			String value = "";
 
-			String[] paramPair = param.split("=");
+			String[] paramPair = param.split("=", 2);
 			if (paramPair != null && paramPair.length > 0) {
 				name = paramPair[0];
 				if (paramPair.length > 1 && paramPair[1] != null) {

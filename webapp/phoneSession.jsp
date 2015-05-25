@@ -162,12 +162,10 @@ $(document).ready(function(event){
 	});
 	$('#paymentResetButton').click(function resetPayment() {
 		document.getElementById('paymentForm').reset();
-		document.getElementById("message").innerHTML="";
 		document.getElementById("paymentStatus").innerHTML="";
 		document.getElementById("referenceId").innerHTML="";
 		document.getElementById("paymentResponseCode").innerHTML="";
 		document.getElementById("paymentResponseMessage").innerHTML="";
-		document.getElementById("message").innerHTML="";
 		document.getElementById("message").innerHTML="";
 		document.getElementById("sessionKeyResponse").innerHTML="";
 		document.getElementById("sessionStatus").innerHTML="";
@@ -209,6 +207,16 @@ $.hpciParamMap = function(queryStr) {
 	}
 	return queryMap;
 }
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+	$('#noButton').click(function () {
+		$('#message').hide('slow');
+	});
+	$('#yesButton').click(function () {
+		$('#message').show('slow');
+	});
+});
 </script>
 <style type="text/css">
 h1 {
@@ -309,11 +317,38 @@ fieldset legend {
 							</div>
 						</div><!-- row -->
 						<div class="row">
-							<div class="col-xs-2 col-sm-2 col-md-2">
-								<input id="expiryMonth" type="text" name="expiryMonth" size="3" placeholder="MM">
+							<div class="col-xs-5 col-sm-3 col-md-3">
+								<select id="expiryMonth" name="expiryMonth" class="selectpicker">
+									<option value="01">01 - January</option>
+									<option value="02">02 - February</option>
+									<option value="03">03 - March</option>
+									<option value="04">04 - April</option>
+									<option value="05">05 - May</option>
+									<option value="06">06 - June</option>
+									<option value="07">07 - July</option>
+									<option value="08">08 - August</option>
+									<option value="09">09 - September</option>
+									<option value="10">10 - October</option>
+									<option value="11">11 - November</option>
+									<option value="12">12 - December</option>
+								</select>
 							</div>
-							<div class="col-xs-2 col-sm-2 col-md-2">
-								<input id="expiryYear" type="text" name="expiryYear" size="3" placeholder="YY">
+							<div class="col-xs-2 col-sm-2 col-md-2">		
+								<!-- id is used in confirmation.jsp -->
+								<select id="expiryYear" name="expiryYear" class="selectpicker">
+									<option value="15">2015</option>
+									<option value="16">2016</option>
+									<option value="17">2017</option>
+									<option value="18">2018</option>
+									<option value="19">2019</option>
+									<option value="20">2020</option>
+									<option value="21">2021</option>
+									<option value="22">2022</option>
+									<option value="23">2023</option>
+									<option value="24">2024</option>
+									<option value="25">2025</option>
+									<option value="26">2026</option>
+								</select>
 							</div>
 						</div><!-- row -->
 					</fieldset>
@@ -481,8 +516,13 @@ fieldset legend {
 						</div><!-- row -->
 						<div class="row">
 							<div class="col-md-12">
-								<label>Full Message: </label>
-								<div id="message" style="word-wrap: break-word;"></div><br />
+								<label>Show Full Message?</label><br />
+								<input id="noButton" type="radio" name="radioButton" checked />No
+								<input id="yesButton" type="radio" name="radioButton" />Yes
+								<br />
+								<label>Full Message: </label><br />
+								<div id="message" style="display:none; word-wrap: break-word;">
+								</div><br />
 							</div>	
 						</div><!-- row -->
 					</fieldset>

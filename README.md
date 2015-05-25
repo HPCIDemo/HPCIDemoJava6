@@ -4,6 +4,10 @@ HPCIDemoJava6 v1.0 Jan 2 2015
 HostedPCI Demo App
 Includes Web Checkout (iFrame) and Phone Session (IVR) services.
 
+Update May 25 2015:
+Added 3D Secure to the iFrame demo.
+Updated to jQuery 2.1.1 and jquery.ba-postmessage.2.0.0 
+
 What is it?
 ============
 HPCIDemo is a small app that will help customers implement the HostedPCI API when they want to use the 

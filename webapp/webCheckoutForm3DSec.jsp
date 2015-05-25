@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>HostedPCI Demo App Web Checkout Payment Page</title>
+<title>HostedPCI Demo App Web Checkout 3D Sec Payment Page</title>
 <!-- Bootstrap -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 <script src="https://cc.hostedpci.com/WBSStatic/site60/proxy/js/hpci-cciframe-1.0.js" type="text/javascript" charset="utf-8"></script>
 <script>
 	var hpciCCFrameHost = "https://cc.hostedpci.com";
-	var hpciCCFrameFullUrl = "https://cc.hostedpci.com/iSynSApp/showPxyPage!ccFrame.action?pgmode1=prod&locationName=javasample1&sid=528160&reportCCType=Y&fullParentHost=http://localhost:8799&fullParentQStr=/webCheckoutForm.jsp";
+	var hpciCCFrameFullUrl = "https://cc.hostedpci.com/iSynSApp/showPxyPage!ccFrame.action?pgmode1=prod&locationName=javasample1&sid=528160&reportCCType=Y&fullParentHost=http://localhost:8799&fullParentQStr=/webCheckoutForm3DSec.jsp";
 	var hpciCCFrameName = "ccframe"; // use the name of the frame containing the credit card
 
 	var hpciSiteErrorHandler = function(errorCode, errorMsg) {
@@ -138,7 +138,8 @@ fieldset legend {
 			<!-- IMPORTANT: id CCAcceptForm needs to match the ID's in the HostedPCI script code -->
 			<!-- So if you change this ID, make sure to change it in all other places -->
 			<!-- Action points to the servlet -->
-			<form id="CCAcceptForm" action="/IframeServlet" method="post">
+			<form id="CCAcceptForm" action="/Iframe3DSecServlet" method="post">
+			<input type="hidden" name="action" value="formRequest">
 				<fieldset>
 					<!-- Form Name -->
 					<legend>Web Checkout</legend>
@@ -164,7 +165,7 @@ fieldset legend {
 						</div><!-- row -->
 						<!-- iframe -->
 						<div class="row">
-							<iframe seamless id="ccframe" name="ccframe" onload="receiveHPCIMsg()" src="https://cc.hostedpci.com/iSynSApp/showPxyPage!ccFrame.action?pgmode1=prod&locationName=javasample1&sid=528160&fullParentHost=http://localhost:8799&fullParentQStr=/webCheckoutForm.jsp" style="border:none" height="61"> 
+							<iframe seamless id="ccframe" name="ccframe" onload="receiveHPCIMsg()" src="https://cc.hostedpci.com/iSynSApp/showPxyPage!ccFrame.action?pgmode1=prod&locationName=javasample1&sid=528160&fullParentHost=http://localhost:8799&fullParentQStr=/webCheckoutForm3DSec.jsp" style="border:none" height="61"> 
 							If you can see this, your browser doesn't understand IFRAME. 
 							</iframe>
 						</div><!-- row -->
@@ -323,7 +324,8 @@ fieldset legend {
 							</div>
 							<div class="col-xs-4 col-sm-3 col-md-5">
 								<select id="paymentProfile" name="paymentProfile">
-									<option value="DEF">DEF - Currency: USD</option>
+									<option value="DEF_3DSEC">DEF_3DSEC - Currency: any</option>
+									<option value="DEF">DEF - Currency: any</option>
 									<option value="DEF_MONERIS">DEF_MONERIS - Currency: CAD</option>
 									<option value="DEF_MONERIS">DEF_MONERIS - Currency: USD</option>
 								</select>
@@ -353,6 +355,7 @@ fieldset legend {
 								<input type="hidden" id="ccNum" name="ccNum" value="" class="form-control"> 
 								<input type="hidden" id="ccCVV" name="ccCVV" value="" class="form-control"> 
 								<input type="hidden" id="ccBIN" name="ccBIN" value="" class="form-control">
+								<input type="hidden" id="action3DSec" name="action3DSec" value="verifyenroll" class="form-control">
 							</div>
 						</div>
 					</fieldset>	

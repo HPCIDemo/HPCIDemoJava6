@@ -3,6 +3,7 @@ package com.isyn;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/IframeServlet")
 public class IframeServlet extends HttpServlet {
 
+	private String cardNumber = "";
+	private String cardCVV = "";
+	private String merchantRefId = "";
+	private String comments = "";
+	private String amount = "";
+	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -32,18 +39,18 @@ public class IframeServlet extends HttpServlet {
 
 		// Get request parameters from form.jsp (all the attributes that the
 		// user inputs)
-		String cardNumber = request.getParameter("ccNum");
-		String cardCVV = request.getParameter("ccCVV");
+		cardNumber = request.getParameter("ccNum");
+		cardCVV = request.getParameter("ccCVV");
 		String expiryMonth = request.getParameter("expiryMonth");
 		String expiryYear = request.getParameter("expiryYear");
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String cardType = request.getParameter("cardType");
-		String amount = request.getParameter("amount");
-		String merchantRefId = request.getParameter("merchantRefId");
+		amount = request.getParameter("amount");
+		merchantRefId = request.getParameter("merchantRefId");
 		String currency = request.getParameter("currency");
 		String paymentProfile = request.getParameter("paymentProfile");
-		String comment = request.getParameter("comment");
+		comments = request.getParameter("comment");
 		String country = request.getParameter("country");
 		String zip = request.getParameter("zip");
 		String state = request.getParameter("state");
@@ -75,7 +82,7 @@ public class IframeServlet extends HttpServlet {
 		hpciRequestParamMap.put("pxyTransaction.txnCurISO", currency);
 		hpciRequestParamMap.put("pxyTransaction.merchantRefId", merchantRefId);
 		hpciRequestParamMap.put("pxyTransaction.txnPayName", paymentProfile);
-		hpciRequestParamMap.put("pxyTransaction.txnComment", comment);
+		hpciRequestParamMap.put("pxyTransaction.txnComment", comments);
 		hpciRequestParamMap.put("pxyCustomerInfo.email", "email@email.com");
 		hpciRequestParamMap.put("pxyCustomerInfo.customerId", "111");
 		hpciRequestParamMap.put("pxyCustomerInfo.billingLocation.firstName", firstName);
@@ -92,18 +99,25 @@ public class IframeServlet extends HttpServlet {
 		// Url string is made of the api url which is given by
 		// HostedPCI + "iSynSApp/paymentAuth.action"
 		String urlString = "https://api-sampqa1stg.c1.hostedpci.com/iSynSApp/paymentAuth.action";
-//		String urlString = "https://api-sampqa1stg.c1.hostedpci.com/iSynSApp/paymentSale.action";
-		// Uses the callUrl method to initiate the call to HostedPCI using the
-		// iframe,
+		// Uses the callUrl method to initiate the call to HostedPCI using the iframe,
 		// It requires the complete url and the populated map
 		String callResponse = DemoUtil.callUrl(urlString, hpciRequestParamMap);
 
-		// Uses the parseQueryString method to collect the response from
-		// HostedPCI
+		// Uses the parseQueryString method to collect the response from HostedPCI
 		// And pass the resulting map in a parameter "map" to be used in the
 		// webCheckoutConfirmation.jsp file
 		request.setAttribute("map", DemoUtil.parseQueryString(callResponse));
 
+		// Create a map to be returned to the client's browser at the end
+		Map<String, String> globalMap = new LinkedHashMap<String, String>();
+		globalMap.put("cardNumber", cardNumber);
+		globalMap.put("cardCVV", cardCVV);
+		globalMap.put("merchantRefId", merchantRefId);
+		globalMap.put("amount", amount);
+		globalMap.put("comments", comments);
+		// Send globalMap to the response page
+		request.setAttribute("globalMap", globalMap);
+		
 		// Pass all the information that was collected to the confirmation page
 		// "webCheckoutConfirmation.jsp"
 		request.getRequestDispatcher("/webCheckoutConfirmation.jsp").forward(request, response);

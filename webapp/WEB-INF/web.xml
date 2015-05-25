@@ -12,6 +12,12 @@
   </servlet>
   <servlet>
     <description></description>
+    <servlet-name>Iframe3DSecServlet</servlet-name>
+    <servlet-class>com.isyn.Iframe3DSecServlet</servlet-class>
+    <url-pattern>/Iframe3DSecServlet</url-pattern>
+  </servlet>
+  <servlet>
+    <description></description>
     <servlet-name>PhoneSessionServlet</servlet-name>
     <servlet-class>com.isyn.PhoneSessionServlet</servlet-class>
     <url-pattern>/PhoneSessionServlet</url-pattern>
